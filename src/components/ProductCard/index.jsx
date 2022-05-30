@@ -27,11 +27,9 @@ class ProductCard extends Component {
 
         {inStock &&
           (attributes.length ? (
-            <button>
-              <Link to={`/product/${id}`}>
-                <img src={cart} alt={'Cart'} />
-              </Link>
-            </button>
+            <Link to={`/product/${id}`}>
+              <img src={cart} alt={'Cart'} />
+            </Link>
           ) : (
             <button onClick={() => onAddToCart(id)}>
               <img src={cart} alt={'Cart'} />

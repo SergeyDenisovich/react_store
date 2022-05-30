@@ -46,7 +46,7 @@ class ProductDescription extends PureComponent {
       };
     });
 
-    const { priceSymbol, productPrice } = calculatePrice(this.props.currency?.label, product.prices);
+    const { priceSymbol, productPrice } = calculatePrice(this.props.currency?.label, product?.prices);
 
     this.setState({
       product,

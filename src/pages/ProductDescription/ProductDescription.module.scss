@@ -89,8 +89,8 @@
 }
 
 .activeImage {
-  outline: 3px solid $bg-color;
-  outline-offset: 2px;
+  box-shadow: 0px 4px 35px rgba(97, 99, 100, 0.19);
+  transform: translateX(10px);
 }
 
 .imageBig {

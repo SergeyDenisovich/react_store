@@ -13,11 +13,13 @@
   &:hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.6);
 
+    & > a,
     & > button {
       opacity: 1;
     }
   }
 
+  a,
   button {
     position: absolute;
     right: 45px;
