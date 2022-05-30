@@ -12,7 +12,7 @@
 
 ### In project uses next technologies:
 
-- React (class component approach)
+- React (container and presentation class component approach)
 
 - React-router-dom
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Header from './components/Header';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 class App extends Component {
   render() {
@@ -14,17 +15,13 @@ class App extends Component {
 
         <Switch>
           <Route history={history} exact path={'/'}>
-            <h2>Home</h2>
-            <Link to={'/cart'}>To Cart</Link>
+            <Home />
           </Route>
 
-          <Route history={history} path={'/cart'}>
-            <h2>Cart</h2>
-            <Link to={'/'}>home</Link>
-          </Route>
+          <Route history={history} path={'/cart'}></Route>
 
           <Route history={history} path={'*'}>
-            <h2>Not Found</h2>
+            <NotFound />
           </Route>
         </Switch>
       </div>
