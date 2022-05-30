@@ -3,7 +3,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  background: $gray;
+  background: $bg-color;
 }
 
 .container {
@@ -12,4 +12,5 @@ body {
   padding: 0 100px;
   width: 100%;
   max-width: 1440px;
+  background-color: $container-bg;
 }

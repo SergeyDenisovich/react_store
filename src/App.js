@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
+import Header from './components/Header';
+
 class App extends Component {
   render() {
     const { history } = this.props;
 
     return (
       <div className='container'>
-        <h1>Header</h1>
+        <Header />
 
         <Switch>
           <Route history={history} exact path={'/'}>
