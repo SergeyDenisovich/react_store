@@ -1,4 +1,47 @@
+@import '../../styles/_variables';
+
 .header {
+  margin-bottom: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .cart {
+    position: relative;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  .cartCount {
+    position: absolute;
+    right: -14px;
+    top: -14px;
+    padding: 6px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $font-color;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    color: #fff;
   }
 }

@@ -1,0 +1,38 @@
+.currency {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 160%;
+  cursor: pointer;
+
+  .arrow {
+    margin-left: 10px;
+  }
+  .arrowUp {
+    transform: rotate(180deg);
+  }
+}
+
+.currencyBlock {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 114px;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 160%;
+  transform: translateY(15%);
+  z-index: 3;
+  background-color: #ffff;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.6);
+
+  li {
+    padding: 8px 20px;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background: #eeeeee;
+  }
+}
