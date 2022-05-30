@@ -21,7 +21,7 @@ class ProductCard extends Component {
         </div>
 
         <div className={styles.description}>
-          <div>{productTitle}</div>
+          <h3>{productTitle}</h3>
           <div>{`${priceSymbol} ${productPrice}`}</div>
         </div>
 

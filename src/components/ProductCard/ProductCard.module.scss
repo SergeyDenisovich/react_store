@@ -65,12 +65,14 @@
 .description {
   font-size: 18px;
 
-  div:first-child {
+  h3 {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
     text-transform: uppercase;
   }
 
-  div:last-child {
+  div {
     font-weight: 600;
   }
 }
