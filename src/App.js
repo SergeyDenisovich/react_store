@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
+import ProductDescription from './pages/ProductDescription';
 import NotFound from './pages/NotFound';
 
 class App extends Component {
@@ -16,6 +17,10 @@ class App extends Component {
         <Switch>
           <Route history={history} exact path={'/'}>
             <Home />
+          </Route>
+
+          <Route history={history} path={'/product/:id'}>
+            <ProductDescription />
           </Route>
 
           <Route history={history} path={'/cart'}></Route>
