@@ -1,0 +1,15 @@
+@import '_reset.scss';
+@import '_variables.scss';
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: $gray;
+}
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 100px;
+  width: 100%;
+  max-width: 1440px;
+}
