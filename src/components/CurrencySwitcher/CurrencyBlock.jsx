@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 
+import { withRef } from '../../hoc/withRef';
 import arrow from '../../assets/images/arrow.svg';
 
 import styles from './CurrencySwitcher.module.scss';
 
 class CurrencyBlock extends Component {
   render() {
-    const { currencySymbol, currencies, isCurrencyBlockVisible, onChangeCurrency, toggleCurrencyBlock } = this.props;
+    const { currencySymbol, currencies, isCurrencyBlockVisible, onChangeCurrency, toggleCurrencyBlock, container } =
+      this.props;
 
     return (
       <>
-        <div onClick={toggleCurrencyBlock} ref={this.container} className={styles.currency}>
+        <div onClick={toggleCurrencyBlock} ref={container} className={styles.currency}>
           <span>{currencySymbol?.symbol}</span>
           <img
             src={arrow}
@@ -31,4 +33,4 @@ class CurrencyBlock extends Component {
   }
 }
 
-export default CurrencyBlock;
+export default withRef(CurrencyBlock);

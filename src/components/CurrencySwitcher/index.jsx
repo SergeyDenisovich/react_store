@@ -54,6 +54,7 @@ class CurrencySwitcher extends Component {
         isCurrencyBlockVisible={this.state.isCurrencyBlockVisible}
         onChangeCurrency={this.onChangeCurrency}
         toggleCurrencyBlock={this.toggleCurrencyBlock}
+        container={this.container}
       />
     );
   }
