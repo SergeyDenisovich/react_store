@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { getProduct } from '../../queries/getProduct';
 
-// import { addToCart } from '../../store/slices/cartSlice';
+import { addToCart } from '../../store/slices/cartSlice';
 import ProductDescriptionPage from './ProductDescriptionPage';
 
 class ProductDescription extends Component {
@@ -83,6 +83,7 @@ class ProductDescription extends Component {
     };
 
     this.props.addToCart(selectedProduct);
+    console.log(selectedProduct);
     this.setState({ redirect: true });
   };
 
@@ -108,4 +109,4 @@ const mapState = ({ currency }) => ({
   currency: currency.currency,
 });
 
-export default compose(connect(mapState, {}), withRouter)(ProductDescription);
+export default compose(connect(mapState, { addToCart }), withRouter)(ProductDescription);

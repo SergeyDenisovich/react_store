@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import CurrencySwitcher from '../CurrencySwitcher';
+import CartMini from '../CartMini';
 import Categories from '../Categories';
-
 import logo from '../../assets/images/logo.svg';
 import cart from '../../assets/images/cart.svg';
 
 import styles from './Header.module.scss';
-import CurrencySwitcher from '../CurrencySwitcher';
-import CartMini from '../CartMini';
 
 class Header extends Component {
   state = {
@@ -25,6 +25,7 @@ class Header extends Component {
 
   render() {
     const { isCartMiniVisible } = this.state;
+    const { cartCount } = this.props;
 
     return (
       <div className={styles.header}>
@@ -39,7 +40,7 @@ class Header extends Component {
 
           <div className={styles.cart} onClick={this.showCartMini}>
             <img src={cart} alt='Cart' />
-            <span className={styles.cartCount}>1</span>
+            {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
           </div>
         </div>
 
@@ -49,4 +50,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapState = (state) => ({
+  cartCount: state.cart.totalCount,
+});
+
+export default connect(mapState)(Header);

@@ -4,7 +4,7 @@ import styles from './ProductDescription.module.scss';
 
 class ProductDescriptionPage extends PureComponent {
   render() {
-    const { product, productImage, productPrice, setProductImg, handleChangeAttrValue, onAddToCart } = this.props;
+    const { product, productImage, productPrice, setProductImg, handleChangeAttrValue } = this.props;
 
     return (
       <>
@@ -77,7 +77,7 @@ class ProductDescriptionPage extends PureComponent {
                 <div>{`${productPrice?.priceSymbol} ${productPrice?.productPrice}`}</div>
               </div>
 
-              <button className={styles.btn} onClick={onAddToCart}>
+              <button className={styles.btn} onClick={() => this.props.onAddToCart(product.id)}>
                 add to cart
               </button>
               <div className={styles.text} dangerouslySetInnerHTML={{ __html: product.description }}></div>
