@@ -24,7 +24,7 @@ class Gallery extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log('Gallery: ', this.state);
 
     return (
       <div className={styles.gallery}>
