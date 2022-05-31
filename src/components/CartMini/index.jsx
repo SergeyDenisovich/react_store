@@ -45,7 +45,7 @@ class CartMini extends Component {
 
           <div className={styles.actions}>
             <Link to={'/cart'} onClick={this.close}>
-              <button disabled={!cart.length} className={!cart.length ? styles.disabledBtn : undefined}>
+              <button disabled={!cart.length} className={!cart.length ? styles.disabledBtn : ''}>
                 view bag
               </button>
             </Link>
