@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { client } from '@tilework/opus';
 import { connect } from 'react-redux';
 
-// import { addToCart } from '../../store/slices/cartSlice';
+import { addToCart } from '../../store/slices/cartSlice';
 import { getCategory } from '../../queries/getCategory';
 
 import HomePage from './HomePage';
@@ -32,8 +32,7 @@ export class Home extends PureComponent {
 
   addProductToCart = (productId) => {
     const product = this.state.products.find(({ id }) => id === productId);
-    // this.props.addToCart(product);
-    console.log(product);
+    this.props.addToCart(product);
   };
 
   render() {
@@ -51,4 +50,4 @@ const mapState = ({ currency, category }) => ({
   category: category.category,
 });
 
-export default connect(mapState, {})(Home);
+export default connect(mapState, { addToCart })(Home);

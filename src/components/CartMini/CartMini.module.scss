@@ -22,13 +22,41 @@
   right: 72px;
   width: 325px;
   background-color: #ffffff;
-}
 
-.title {
-  margin-bottom: 32px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 160%;
+  .title {
+    margin-bottom: 32px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 160%;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  .products {
+    margin: 32px 0 32px;
+  }
+
+  .totalPrice {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span:nth-child(1) {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 18px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    span:nth-child(2) {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 160%;
+    }
+  }
 }
 
 .actions {

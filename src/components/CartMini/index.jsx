@@ -25,11 +25,27 @@ class CartMini extends Component {
     return (
       <div className={styles.overlay} onClick={this.close}>
         <section className={styles.minicart} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.title}>No product's in cart!</div>
+          {cart.length > 0 ? (
+            <>
+              <div className={styles.title}>
+                My Bag,
+                <span>{` 3 items`}</span>
+              </div>
+
+              <div className={styles.products}>123</div>
+
+              <div className={styles.totalPrice}>
+                <span>Total</span>
+                <span>$200.00</span>
+              </div>
+            </>
+          ) : (
+            <div className={styles.title}>No product's in cart!</div>
+          )}
 
           <div className={styles.actions}>
             <Link to={'/cart'} onClick={this.close}>
-              <button disabled={!cart.length} className={!cart.length && styles.disabledBtn}>
+              <button disabled={!cart.length} className={!cart.length ? styles.disabledBtn : undefined}>
                 view bag
               </button>
             </Link>
