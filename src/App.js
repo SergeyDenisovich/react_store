@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import ProductDescription from './pages/ProductDescription';
 import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 
 class App extends Component {
   render() {
@@ -24,7 +25,7 @@ class App extends Component {
           </Route>
 
           <Route history={history} path={'/cart'}>
-            <h1 style={{ marginTop: 90 }}>Cart page</h1>
+            <Cart />
           </Route>
 
           <Route history={history} path={'*'}>

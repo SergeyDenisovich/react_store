@@ -1,0 +1,42 @@
+@import '../../styles/_variables';
+
+.cart {
+  padding: 80px 0 200px;
+
+  h1 {
+    padding-bottom: 55px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    text-transform: uppercase;
+    border-bottom: 1px solid $bg-color;
+  }
+
+  .orderBlock {
+    padding-top: 32px;
+    padding-bottom: 16px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px;
+
+    & > span:nth-child(5) {
+      font-weight: 600;
+    }
+
+    & > span:nth-child(2n) {
+      line-height: 24px;
+      font-weight: 700;
+    }
+  }
+  .orderBtn {
+    padding: 13px 116px;
+    text-transform: uppercase;
+    color: #fff;
+    background: $color-green;
+    cursor: pointer;
+  }
+}
