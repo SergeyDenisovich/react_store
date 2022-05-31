@@ -137,7 +137,7 @@
   }
 
   input[type='radio']:checked + label[data-attr='swatch'] {
-    outline: 3px solid $bg-color;
+    outline: 2px solid $color-green;
     outline-offset: 1px;
   }
 
@@ -161,6 +161,7 @@
   .attrSwatch {
     width: 32px;
     height: 32px;
+    border: 1px solid $bg-color;
 
     &:not(:last-child) {
       margin-right: 15px;
