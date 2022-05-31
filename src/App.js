@@ -23,7 +23,9 @@ class App extends Component {
             <ProductDescription />
           </Route>
 
-          <Route history={history} path={'/cart'}></Route>
+          <Route history={history} path={'/cart'}>
+            <h1 style={{ marginTop: 90 }}>Cart page</h1>
+          </Route>
 
           <Route history={history} path={'*'}>
             <NotFound />
