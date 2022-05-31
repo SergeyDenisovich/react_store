@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import Slider from '../Slider/Slider';
+import Gallery from '../Gallery';
 import plusIcon from '../../assets/images/plus-square.svg';
 import minusIcon from '../../assets/images/minus-square.svg';
 
@@ -76,8 +76,7 @@ class CartItem extends Component {
           {cart === 'miniCart' ? (
             <img src={product.gallery[0]} alt='Product' />
           ) : product.gallery.length > 1 ? (
-            // <Slider images={product.gallery} />
-            1
+            <Gallery gallery={product.gallery} />
           ) : (
             <img src={product.gallery[0]} alt='Product' />
           )}

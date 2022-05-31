@@ -1,0 +1,36 @@
+.gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  button.prevBtn {
+    position: absolute;
+    right: 48px;
+    bottom: 16px;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  button.nextBtn {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    cursor: pointer;
+  }
+}
