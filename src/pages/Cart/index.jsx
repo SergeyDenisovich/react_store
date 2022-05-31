@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import CartItem from '../../components/CartItem/CartItem';
+import CartItem from '../../components/CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 
 import styles from './Cart.module.scss';

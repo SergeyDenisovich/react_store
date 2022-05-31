@@ -29,7 +29,11 @@ class CartItem extends Component {
               return (
                 <div key={attr.id} className={styles.attributeBlock}>
                   <div className={styles.attributeTitle}>{`${attr.name}:`}</div>
-                  <div className={styles.attributeItems}>
+                  <div
+                    className={[styles.attributeItems, attr.type === 'swatch' ? styles.attributeItemsSwatch : ''].join(
+                      ' '
+                    )}
+                  >
                     {attr.items.map(({ id, value }) =>
                       attr.type === 'text' ? (
                         <span

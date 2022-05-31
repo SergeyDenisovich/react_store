@@ -66,6 +66,10 @@
     gap: 10px;
     font-family: 'Source Sans Pro', sans-serif;
 
+    &Swatch {
+      padding: 0 0 3px 3px;
+    }
+
     span.attrText {
       min-width: 63px;
       min-height: 45px;
@@ -125,73 +129,116 @@
   display: grid;
   grid-template-columns: 1fr 121px;
   gap: 8px;
-  border-bottom: 1px solid #e5e5e5;
 
   &:not(:last-child) {
     margin-bottom: 40px;
   }
 
-  .leftSectionMini {
+  .leftSection {
     display: flex;
     justify-content: space-between;
   }
 
-  .productTitleMini,
-  .productPriceMini {
+  .rightSection {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .productTitle,
+  .productPrice {
     margin-bottom: 10px;
-    font-weight: 300;
     font-size: 16px;
+    font-weight: 300;
     line-height: 160%;
   }
 
-  .productPriceMini {
-    font-weight: 500;
+  .productPrice {
+    margin-bottom: 8px;
+    font-weight: 600;
   }
 
-  .attributeBlockMini {
+  .attributeBlock {
     &:not(:last-child) {
       margin-bottom: 8px;
     }
   }
 
-  .attributeTitleMini {
+  .attributeTitle {
+    margin-bottom: 8px;
     font-size: 14px;
     line-height: 16px;
   }
 
-  .attributeItemsMini {
+  .attributeItems {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 
-    span {
-      padding: 3px 3px;
+    &Swatch {
+      padding: 0 0 2px 2px;
+    }
+
+    span.attrText {
+      min-width: 24px;
+      min-height: 24px;
+      padding: 2px 0;
+      flex: 1 1 0px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 14px;
+      border: 1px solid $font-color;
+      font-family: 'Source Sans Pro', sans-serif;
     }
 
-    span.attrSwatchMini {
-      width: 16px;
-      height: 16px;
+    span.attrSwatch {
+      min-width: 16px;
+      min-height: 16px;
+      border: 1px solid $bg-color;
     }
   }
 
-  .productCountMini {
+  .productCount {
     font-size: 16px;
     line-height: 160%;
     font-weight: 500;
   }
 
-  .actionBlockMini {
+  .actionBlock {
+    padding-left: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+
+    button {
+      padding: 0;
+      background: transparent;
+    }
 
     img {
       width: 24px;
       height: 24px;
     }
+  }
+
+  .attrTextActive {
+    background: $font-color;
+    color: #fff;
+  }
+
+  .attrSwatchActive {
+    outline: 1px solid $color-green;
+    outline-offset: 1px;
   }
 }

@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import CartItem from '../CartItem';
+import { calculatePrice } from '../../utils/calculatePrice';
+
 import styles from './CartMini.module.scss';
 
 class CartMini extends Component {
+  cart = 'miniCart';
+
   componentDidMount() {
     if (this.props.isVisible) {
       document.body.style.overflow = 'hidden';
@@ -20,7 +25,10 @@ class CartMini extends Component {
   };
 
   render() {
-    const { cart } = this.props;
+    const {
+      cart,
+      currency: { currency },
+    } = this.props;
 
     return (
       <div className={styles.overlay} onClick={this.close}>
@@ -29,10 +37,24 @@ class CartMini extends Component {
             <>
               <div className={styles.title}>
                 My Bag,
-                <span>{` 3 items`}</span>
+                <span>{` ${cart.length} items`}</span>
               </div>
 
-              <div className={styles.products}>123</div>
+              <div className={styles.products}>
+                {cart.map((product) => {
+                  const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
+
+                  return (
+                    <CartItem
+                      key={product.id}
+                      product={product}
+                      cart={this.cart}
+                      priceSymbol={priceSymbol}
+                      productPrice={productPrice}
+                    />
+                  );
+                })}
+              </div>
 
               <div className={styles.totalPrice}>
                 <span>Total</span>
@@ -59,6 +81,7 @@ class CartMini extends Component {
 
 const mapState = (state) => ({
   cart: state.cart.cart,
+  currency: state.currency,
 });
 
 export default connect(mapState)(CartMini);

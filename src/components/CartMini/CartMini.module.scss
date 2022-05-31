@@ -20,7 +20,7 @@
   padding: 32px 16px;
   top: 0;
   right: 72px;
-  width: 325px;
+  min-width: 325px;
   background-color: #ffffff;
 
   .title {
@@ -36,6 +36,8 @@
 
   .products {
     margin: 32px 0 32px;
+    max-height: 400px;
+    overflow-y: auto;
   }
 
   .totalPrice {
