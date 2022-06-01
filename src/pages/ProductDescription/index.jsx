@@ -71,19 +71,16 @@ class ProductDescription extends Component {
 
   onAddToCart = () => {
     const selectedOptions = this.state.selectedAttrs;
-    const { id, name, brand, gallery, prices, attributes } = this.state.product;
+
     const selectedProduct = {
-      id,
-      name,
-      brand,
-      gallery,
-      prices,
-      attributes,
+      ...this.state.product,
       selectedOptions,
     };
 
     this.props.addToCart(selectedProduct);
     this.setState({ redirect: true });
+
+    console.log(selectedProduct);
   };
 
   render() {

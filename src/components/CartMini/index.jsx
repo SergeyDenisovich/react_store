@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
+import { productArrayFromCart } from '../../utils/productArrayFromCart';
 
 import styles from './CartMini.module.scss';
 
@@ -26,22 +27,24 @@ class CartMini extends Component {
 
   render() {
     const {
-      cart,
+      cart: { cart, totalCount },
       currency: { currency },
     } = this.props;
+
+    const cartProducts = productArrayFromCart(cart);
 
     return (
       <div className={styles.overlay} onClick={this.close}>
         <section className={styles.minicart} onClick={(e) => e.stopPropagation()}>
-          {cart.length > 0 ? (
+          {cartProducts.length > 0 ? (
             <>
               <div className={styles.title}>
                 My Bag,
-                <span>{` ${cart.length} items`}</span>
+                <span>{` ${totalCount} items`}</span>
               </div>
 
               <div className={styles.products}>
-                {cart.map((product) => {
+                {cartProducts.map((product) => {
                   const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
                   return (
@@ -67,7 +70,7 @@ class CartMini extends Component {
 
           <div className={styles.actions}>
             <Link to={'/cart'} onClick={this.close}>
-              <button disabled={!cart.length} className={!cart.length ? styles.disabledBtn : ''}>
+              <button disabled={!totalCount} className={!totalCount ? styles.disabledBtn : ''}>
                 view bag
               </button>
             </Link>
@@ -80,7 +83,7 @@ class CartMini extends Component {
 }
 
 const mapState = (state) => ({
-  cart: state.cart.cart,
+  cart: state.cart,
   currency: state.currency,
 });
 

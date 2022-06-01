@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import CartItem from '../../components/CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
+import { productArrayFromCart } from '../../utils/productArrayFromCart';
 
 import styles from './Cart.module.scss';
 
@@ -15,11 +16,13 @@ class Cart extends Component {
       currency: { currency },
     } = this.props;
 
+    const cartProducts = productArrayFromCart(cart);
+
     return (
       <section className={styles.cart}>
         <h1>Cart</h1>
 
-        {cart.map((product) => {
+        {cartProducts.map((product) => {
           const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
           return (
