@@ -51,7 +51,7 @@ class Cart extends Component {
 
         <div className={styles.orderBlock}>
           <span>Tax 21%:</span>
-          <span>{'$42.00'}</span>
+          <span>{`$${(200.0 * 0.21).toFixed(2)}`}</span>
           <span>Quantity:</span>
           <span>{totalCount}</span>
           <span>Total:</span>
