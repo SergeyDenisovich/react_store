@@ -8,7 +8,7 @@ import styles from './CartItem.module.scss';
 
 class CartItem extends Component {
   render() {
-    const { product, cart, priceSymbol, productPrice } = this.props;
+    const { product, cart, priceSymbol, productPrice, onPlusCartItem, onMinusCartItem } = this.props;
     // cart={'miniCart'} - minicart block
     // cart={'cart'} - cart page
 
@@ -63,11 +63,11 @@ class CartItem extends Component {
           </div>
 
           <div className={styles.actionBlock}>
-            <button onClick={() => {}}>
+            <button onClick={() => onPlusCartItem(product)}>
               <img src={plusIcon} alt='Icon plus' />
             </button>
             <span className={styles.productCount}>{product.count}</span>
-            <button onClick={() => {}}>
+            <button onClick={() => onMinusCartItem(product)}>
               <img src={minusIcon} alt='Icon minus' />
             </button>
           </div>

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { calcProductCount } from '../../utils/calcProductCount';
-import { productArrayFromCart } from '../../utils/productArrayFromCart';
 
 const initialState = {
   cart: {},
@@ -33,11 +32,34 @@ const cartSlice = createSlice({
 
       state.totalCount = calcProductCount(state.cart);
     },
+
+    plusCartItem: (state, action) => {
+      const sumProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
+
+      state.cart[action.payload.id].forEach((product) => {
+        if (JSON.stringify(product.selectedOptions) === sumProductSelectOptions) {
+          product.count++;
+        }
+      });
+
+      state.totalCount = calcProductCount(state.cart);
+    },
+    minusCartItem: (state, action) => {
+      const minusProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
+
+      state.cart[action.payload.id].forEach((product) => {
+        if (JSON.stringify(product.selectedOptions) === minusProductSelectOptions) {
+          product.count--;
+        }
+      });
+
+      state.totalCount = calcProductCount(state.cart);
+    },
   },
 });
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart } = actions;
+export const { addToCart, plusCartItem, minusCartItem } = actions;
 
 export default reducer;

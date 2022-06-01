@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
+import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
 
 import styles from './CartMini.module.scss';
 
@@ -23,6 +24,16 @@ class CartMini extends Component {
 
   close = () => {
     this.props.closeCartMini();
+  };
+
+  onPlusCartItem = (product) => {
+    const { id, selectedOptions } = product;
+    this.props.plusCartItem({ id, selectedOptions });
+  };
+
+  onMinusCartItem = (product) => {
+    const { id, selectedOptions } = product;
+    this.props.minusCartItem({ id, selectedOptions });
   };
 
   render() {
@@ -44,16 +55,18 @@ class CartMini extends Component {
               </div>
 
               <div className={styles.products}>
-                {cartProducts.map((product) => {
+                {cartProducts.map((product, index) => {
                   const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
                   return (
                     <CartItem
-                      key={product.id}
+                      key={`${product.id}_${index}`}
                       product={product}
                       cart={this.cart}
                       priceSymbol={priceSymbol}
                       productPrice={productPrice}
+                      onPlusCartItem={this.onPlusCartItem}
+                      onMinusCartItem={this.onMinusCartItem}
                     />
                   );
                 })}
@@ -87,4 +100,4 @@ const mapState = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapState)(CartMini);
+export default connect(mapState, { plusCartItem, minusCartItem })(CartMini);

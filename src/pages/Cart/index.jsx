@@ -4,15 +4,26 @@ import { connect } from 'react-redux';
 import CartItem from '../../components/CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
+import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
 
 import styles from './Cart.module.scss';
 
 class Cart extends Component {
   cart = 'cart';
 
+  onPlusCartItem = (product) => {
+    const { id, selectedOptions } = product;
+    this.props.plusCartItem({ id, selectedOptions });
+  };
+
+  onMinusCartItem = (product) => {
+    const { id, selectedOptions } = product;
+    this.props.minusCartItem({ id, selectedOptions });
+  };
+
   render() {
     const {
-      cart,
+      cart: { cart, totalCount },
       currency: { currency },
     } = this.props;
 
@@ -22,16 +33,18 @@ class Cart extends Component {
       <section className={styles.cart}>
         <h1>Cart</h1>
 
-        {cartProducts.map((product) => {
+        {cartProducts.map((product, index) => {
           const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
           return (
             <CartItem
-              key={product.id}
+              key={`${product.id}_${index}`}
               product={product}
               cart={this.cart}
               priceSymbol={priceSymbol}
               productPrice={productPrice}
+              onPlusCartItem={this.onPlusCartItem}
+              onMinusCartItem={this.onMinusCartItem}
             />
           );
         })}
@@ -40,7 +53,7 @@ class Cart extends Component {
           <span>Tax 21%:</span>
           <span>{'$42.00'}</span>
           <span>Quantity:</span>
-          <span>{'3'}</span>
+          <span>{totalCount}</span>
           <span>Total:</span>
           <span>{'$200.00'}</span>
         </div>
@@ -52,8 +65,8 @@ class Cart extends Component {
 }
 
 const mapState = (state) => ({
-  cart: state.cart.cart,
+  cart: state.cart,
   currency: state.currency,
 });
 
-export default connect(mapState)(Cart);
+export default connect(mapState, { plusCartItem, minusCartItem })(Cart);
