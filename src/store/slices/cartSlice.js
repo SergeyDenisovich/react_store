@@ -14,13 +14,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      if (!state.cart[action.payload.id]) {
-        state.cart[action.payload.id] = [{ ...action.payload, count: 1 }];
+      const [product, currency] = action.payload;
+      let total = 0;
+
+      if (!state.cart[product.id]) {
+        state.cart[product.id] = [{ ...product, count: 1 }];
       } else {
-        const addedProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
+        const addedProductSelectOptions = JSON.stringify(product.selectedOptions);
         let isProductExist = false;
 
-        state.cart[action.payload.id].forEach((product) => {
+        state.cart[product.id].forEach((product) => {
           if (JSON.stringify(product.selectedOptions) === addedProductSelectOptions) {
             isProductExist = true;
             product.count++;
@@ -28,9 +31,19 @@ const cartSlice = createSlice({
         });
 
         if (!isProductExist) {
-          state.cart[action.payload.id].push({ ...action.payload, count: 1 });
+          state.cart[product.id].push({ ...product, count: 1 });
         }
       }
+
+      const cartItemsArr = productArrayFromCart(state.cart);
+      cartItemsArr.forEach((product) => {
+        const { productPrice } = calculatePrice(currency.label, product.prices);
+        const productTotalPrice = productPrice * product.count;
+
+        total += productTotalPrice;
+      });
+
+      state.totalPrice = total;
 
       state.totalCount = calcProductCount(state.cart);
     },

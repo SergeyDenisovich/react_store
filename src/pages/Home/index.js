@@ -32,9 +32,7 @@ export class Home extends PureComponent {
 
   addProductToCart = (productId) => {
     const product = this.state.products.find(({ id }) => id === productId);
-    this.props.addToCart(product);
-
-    console.log(product);
+    this.props.addToCart([product, this.props.currency]);
   };
 
   render() {
