@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
-import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
+import { plusCartItem, minusCartItem, currencyUpdate } from '../../store/slices/cartSlice';
 
 import styles from './CartMini.module.scss';
 
@@ -15,6 +15,13 @@ class CartMini extends Component {
   componentDidMount() {
     if (this.props.isVisible) {
       document.body.style.overflow = 'hidden';
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      const { currency } = this.props.currency;
+      this.props.currencyUpdate(currency);
     }
   }
 
@@ -38,7 +45,7 @@ class CartMini extends Component {
 
   render() {
     const {
-      cart: { cart, totalCount },
+      cart: { cart, totalCount, totalPrice },
       currency: { currency },
     } = this.props;
 
@@ -74,7 +81,7 @@ class CartMini extends Component {
 
               <div className={styles.totalPrice}>
                 <span>Total</span>
-                <span>$200.00</span>
+                <span>{`${currency?.symbol}${totalPrice.toFixed(2)}`}</span>
               </div>
             </>
           ) : (
@@ -100,4 +107,4 @@ const mapState = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapState, { plusCartItem, minusCartItem })(CartMini);
+export default connect(mapState, { plusCartItem, minusCartItem, currencyUpdate })(CartMini);

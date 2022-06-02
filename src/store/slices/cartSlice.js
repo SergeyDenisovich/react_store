@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { calcProductCount } from '../../utils/calcProductCount';
+import { productArrayFromCart } from '../../utils/productArrayFromCart';
+import { calculatePrice } from '../../utils/calculatePrice';
 
 const initialState = {
   cart: {},
@@ -44,6 +46,7 @@ const cartSlice = createSlice({
 
       state.totalCount = calcProductCount(state.cart);
     },
+
     minusCartItem: (state, action) => {
       const minusProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
 
@@ -55,11 +58,27 @@ const cartSlice = createSlice({
 
       state.totalCount = calcProductCount(state.cart);
     },
+
+    currencyUpdate: (state, action) => {
+      const currency = action.payload.label;
+
+      let total = 0;
+
+      const cartItemsArr = productArrayFromCart(state.cart);
+      cartItemsArr.forEach((product) => {
+        const { priceSymbol, productPrice } = calculatePrice(currency, product.prices);
+        const productTotalPrice = productPrice * product?.count;
+
+        total += productTotalPrice;
+      });
+
+      state.totalPrice = total;
+    },
   },
 });
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart, plusCartItem, minusCartItem } = actions;
+export const { addToCart, plusCartItem, minusCartItem, currencyUpdate } = actions;
 
 export default reducer;

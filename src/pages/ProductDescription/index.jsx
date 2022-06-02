@@ -79,8 +79,6 @@ class ProductDescription extends Component {
 
     this.props.addToCart(selectedProduct);
     this.setState({ redirect: true });
-
-    console.log(selectedProduct);
   };
 
   render() {

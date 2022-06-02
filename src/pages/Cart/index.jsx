@@ -4,12 +4,20 @@ import { connect } from 'react-redux';
 import CartItem from '../../components/CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
-import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
+import { plusCartItem, minusCartItem, currencyUpdate } from '../../store/slices/cartSlice';
 
 import styles from './Cart.module.scss';
 
 class Cart extends Component {
   cart = 'cart';
+  tax = 0.21;
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      const { currency } = this.props.currency;
+      this.props.currencyUpdate(currency);
+    }
+  }
 
   onPlusCartItem = (product) => {
     const { id, selectedOptions } = product;
@@ -23,11 +31,12 @@ class Cart extends Component {
 
   render() {
     const {
-      cart: { cart, totalCount },
+      cart: { cart, totalCount, totalPrice },
       currency: { currency },
     } = this.props;
 
     const cartProducts = productArrayFromCart(cart);
+    const tax = (totalPrice * this.tax).toFixed(2);
 
     return (
       <section className={styles.cart}>
@@ -51,11 +60,11 @@ class Cart extends Component {
 
         <div className={styles.orderBlock}>
           <span>Tax 21%:</span>
-          <span>{`$${(200.0 * 0.21).toFixed(2)}`}</span>
+          <span>{`${currency?.symbol}${tax}`}</span>
           <span>Quantity:</span>
           <span>{totalCount}</span>
           <span>Total:</span>
-          <span>{'$200.00'}</span>
+          <span>{`${currency?.symbol}${totalPrice.toFixed(2)}`}</span>
         </div>
 
         <button className={styles.orderBtn}>order</button>
@@ -69,4 +78,4 @@ const mapState = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapState, { plusCartItem, minusCartItem })(Cart);
+export default connect(mapState, { plusCartItem, minusCartItem, currencyUpdate })(Cart);
