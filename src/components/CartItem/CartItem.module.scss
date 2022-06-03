@@ -1,10 +1,11 @@
 @import '../../styles/variables';
 
 .cartItem {
+  position: relative;
   padding: 24px 0;
   min-height: 288px;
   display: grid;
-  grid-template-columns: 1fr 300px 5px;
+  grid-template-columns: 1fr 300px 15px;
   gap: 24px;
   border-bottom: 1px solid $bg-color;
 
@@ -119,6 +120,15 @@
   .attrSwatchActive {
     outline: 2px solid $color-green;
     outline-offset: 1px;
+  }
+
+  .deleteBtn {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
   }
 }
 

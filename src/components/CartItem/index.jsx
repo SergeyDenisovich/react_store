@@ -82,9 +82,11 @@ class CartItem extends Component {
           )}
         </div>
         {cart === 'cart' && (
-          <div>
-            <button onClick={() => deleteItem(product.id)}>X</button>
-          </div>
+          <>
+            <button className={styles.deleteBtn} title='Delete from cart' onClick={() => deleteItem(product.id)}>
+              &#10006;
+            </button>
+          </>
         )}
       </section>
     );

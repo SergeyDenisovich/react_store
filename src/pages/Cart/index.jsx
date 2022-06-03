@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import CartItem from '../../components/CartItem';
@@ -36,37 +37,46 @@ class Cart extends Component {
 
     return (
       <section className={styles.cart}>
-        <h1>Cart</h1>
+        {cartProducts.length !== 0 ? (
+          <>
+            <h1>Cart</h1>
 
-        {cartProducts.map((product, index) => {
-          const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
-          const productTotalPrice = productPrice * product.count;
-          this.totalPrice.current += productTotalPrice;
+            {cartProducts.map((product, index) => {
+              const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
-          return (
-            <CartItem
-              key={`${product.id}_${index}`}
-              product={product}
-              cart={this.cart}
-              priceSymbol={priceSymbol}
-              productPrice={productPrice}
-              onPlusCartItem={this.onPlusCartItem}
-              onMinusCartItem={this.onMinusCartItem}
-              deleteItem={this.deleteItemFromCart}
-            />
-          );
-        })}
+              return (
+                <CartItem
+                  key={`${product.id}_${index}`}
+                  product={product}
+                  cart={this.cart}
+                  priceSymbol={priceSymbol}
+                  productPrice={productPrice}
+                  onPlusCartItem={this.onPlusCartItem}
+                  onMinusCartItem={this.onMinusCartItem}
+                  deleteItem={this.deleteItemFromCart}
+                />
+              );
+            })}
 
-        <div className={styles.orderBlock}>
-          <span>Tax 21%:</span>
-          <span>{}</span>
-          <span>Quantity:</span>
-          <span>{totalCount}</span>
-          <span>Total:</span>
-          <span>{}</span>
-        </div>
+            <div className={styles.orderBlock}>
+              <span>Tax 21%:</span>
+              <span>{}</span>
+              <span>Quantity:</span>
+              <span>{totalCount}</span>
+              <span>Total:</span>
+              <span>{}</span>
+            </div>
 
-        <button className={styles.orderBtn}>order</button>
+            <button className={styles.orderBtn}>order</button>
+          </>
+        ) : (
+          <>
+            <p>Cart is empty!</p>
+            <Link to={'/'}>
+              <button className={styles.back}>Back</button>
+            </Link>
+          </>
+        )}
       </section>
     );
   }
