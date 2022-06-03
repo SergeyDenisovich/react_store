@@ -21,13 +21,6 @@ class CartMini extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props !== prevProps) {
-  //     const { currency } = this.props.currency;
-  //     this.props.currencyUpdate(currency);
-  //   }
-  // }
-
   componentWillUnmount() {
     document.body.style.overflow = 'unset';
   }
