@@ -5,12 +5,15 @@ import { connect } from 'react-redux';
 import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
-import { plusCartItem, minusCartItem, currencyUpdate } from '../../store/slices/cartSlice';
+import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
 
 import styles from './CartMini.module.scss';
 
 class CartMini extends Component {
   cart = 'miniCart';
+  state = {
+    totalPrice: 0,
+  };
 
   componentDidMount() {
     if (this.props.isVisible) {
@@ -18,12 +21,12 @@ class CartMini extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      const { currency } = this.props.currency;
-      this.props.currencyUpdate(currency);
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props !== prevProps) {
+  //     const { currency } = this.props.currency;
+  //     this.props.currencyUpdate(currency);
+  //   }
+  // }
 
   componentWillUnmount() {
     document.body.style.overflow = 'unset';
@@ -45,7 +48,7 @@ class CartMini extends Component {
 
   render() {
     const {
-      cart: { cart, totalCount, totalPrice },
+      cart: { cart, totalCount },
       currency: { currency },
     } = this.props;
 
@@ -81,7 +84,7 @@ class CartMini extends Component {
 
               <div className={styles.totalPrice}>
                 <span>Total</span>
-                <span>{`${currency?.symbol}${totalPrice.toFixed(2)}`}</span>
+                <span>{}</span>
               </div>
             </>
           ) : (
@@ -107,4 +110,4 @@ const mapState = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapState, { plusCartItem, minusCartItem, currencyUpdate })(CartMini);
+export default connect(mapState, { plusCartItem, minusCartItem })(CartMini);

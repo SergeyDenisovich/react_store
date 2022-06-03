@@ -77,7 +77,7 @@ class ProductDescription extends Component {
       selectedOptions,
     };
 
-    this.props.addToCart([selectedProduct, this.props.currency]);
+    this.props.addToCart(selectedProduct);
     this.setState({ redirect: true });
   };
 

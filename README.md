@@ -2,13 +2,15 @@
 
 ## React shopping store:
 
-- filtering product's by categories ('ALL', 'CLOTHES', 'TECH')
+- Filtering product's by categories ('ALL', 'CLOTHES', 'TECH')
 
-- product description page (if product has available attributes)
+- Product description page (if product has available attributes)
 
-- ability to add product in cart (if product on sale!)
+- Ability to add product in cart (if product on sale!)
 
-- ability to change product count in cart or delete product from cart
+- Ability to change product count in cart or delete product from cart
+
+- Ability to change product
 
 ### In project uses next technologies:
 
@@ -20,19 +22,19 @@
 
 - OPUS (GraphQL client)
 
-- SCSS
+- SCSS (modules approach)
 
-### Run project
+### Run project:
 
-- install project dependencies:
+- Install project dependencies:
 
 ```sh
  npm install
 ```
 
-- run GraphQl server with data!
+- Run GraphQl server with data
 
-- start project in dev mode:
+- Start project in development mode:
 
 ```sh
  npm run start

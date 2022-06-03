@@ -8,7 +8,7 @@ import styles from './CartItem.module.scss';
 
 class CartItem extends Component {
   render() {
-    const { product, cart, priceSymbol, productPrice, onPlusCartItem, onMinusCartItem } = this.props;
+    const { product, cart, priceSymbol, productPrice, onPlusCartItem, onMinusCartItem, deleteItem } = this.props;
     // cart={'miniCart'} - minicart block
     // cart={'cart'} - cart page
 
@@ -81,6 +81,11 @@ class CartItem extends Component {
             <img src={product.gallery[0]} alt='Product' />
           )}
         </div>
+        {cart === 'cart' && (
+          <div>
+            <button onClick={() => deleteItem(product.id)}>X</button>
+          </div>
+        )}
       </section>
     );
   }
