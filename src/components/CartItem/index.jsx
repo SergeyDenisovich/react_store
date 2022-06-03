@@ -67,7 +67,9 @@ class CartItem extends Component {
               <img src={plusIcon} alt='Icon plus' />
             </button>
             <span className={styles.productCount}>{product.count}</span>
-            <button disabled={product.count === 1} onClick={() => onMinusCartItem(product)}>
+
+            {/* <button disabled={product.count === 1} onClick={() => onMinusCartItem(product)}></button> */}
+            <button onClick={() => onMinusCartItem(product)}>
               <img src={minusIcon} alt='Icon minus' />
             </button>
           </div>
