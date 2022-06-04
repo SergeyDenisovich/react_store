@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -6,14 +6,12 @@ import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { productArrayFromCart } from '../../utils/productArrayFromCart';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
+import { totalPrice } from '../../store/selectors/cartSelector';
 
 import styles from './CartMini.module.scss';
 
-class CartMini extends Component {
+class CartMini extends PureComponent {
   cart = 'miniCart';
-  state = {
-    totalPrice: 0,
-  };
 
   componentDidMount() {
     if (this.props.isVisible) {
@@ -29,7 +27,7 @@ class CartMini extends Component {
     this.props.closeCartMini();
   };
 
-  onPlusCartItem = (product) => {
+  onPlusCartItem = (product, productPrice) => {
     const { id, selectedOptions } = product;
     this.props.plusCartItem({ id, selectedOptions });
   };
@@ -43,6 +41,7 @@ class CartMini extends Component {
     const {
       cart: { cart, totalCount },
       currency: { currency },
+      totalPrice,
     } = this.props;
 
     const cartProducts = productArrayFromCart(cart);
@@ -77,7 +76,7 @@ class CartMini extends Component {
 
               <div className={styles.totalPrice}>
                 <span>Total</span>
-                <span>{}</span>
+                <span>{`${currency.symbol}${totalPrice.toFixed(2)}`}</span>
               </div>
             </>
           ) : (
@@ -98,9 +97,10 @@ class CartMini extends Component {
   }
 }
 
-const mapState = (state) => ({
-  cart: state.cart,
-  currency: state.currency,
+const mapState = ({ cart, currency }) => ({
+  cart: cart,
+  currency: currency,
+  totalPrice: Object.keys(cart.cart).length > 0 && totalPrice(cart.cart, currency.currency.label),
 });
 
 export default connect(mapState, { plusCartItem, minusCartItem })(CartMini);

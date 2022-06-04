@@ -26,7 +26,6 @@ export class Home extends PureComponent {
     const {
       category: { products },
     } = await client.post(getCategory(category));
-
     this.setState({ products });
   };
 

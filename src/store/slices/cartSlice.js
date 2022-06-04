@@ -11,19 +11,21 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      if (!state.cart[action.payload.id]) {
-        state.cart[action.payload.id] = [{ ...action.payload, count: 1 }];
-      } else {
-        const addedProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
+      const product = action.payload;
 
-        const productExistIndex = state.cart[action.payload.id].findIndex(
+      if (!state.cart[product.id]) {
+        state.cart[product.id] = [{ ...product, count: 1 }];
+      } else {
+        const addedProductSelectOptions = JSON.stringify(product.selectedOptions);
+
+        const productExistIndex = state.cart[product.id].findIndex(
           (product) => JSON.stringify(product.selectedOptions) === addedProductSelectOptions
         );
 
         if (productExistIndex !== -1) {
-          state.cart[action.payload.id][productExistIndex].count++;
+          state.cart[product.id][productExistIndex].count++;
         } else {
-          state.cart[action.payload.id].push({ ...action.payload, count: 1 });
+          state.cart[product.id].push({ ...product, count: 1 });
         }
       }
 
@@ -32,12 +34,11 @@ const cartSlice = createSlice({
 
     plusCartItem: (state, action) => {
       const sumProductSelectOptions = JSON.stringify(action.payload.selectedOptions);
-
       let productIndex = state.cart[action.payload.id].findIndex(
         (product) => JSON.stringify(product.selectedOptions) === sumProductSelectOptions
       );
-
       state.cart[action.payload.id][productIndex].count++;
+
       state.totalCount = calcProductCount(state.cart);
     },
 
@@ -54,17 +55,11 @@ const cartSlice = createSlice({
 
       state.totalCount = calcProductCount(state.cart);
     },
-
-    deleteCartItem: (state, action) => {
-      delete state.cart[action.payload];
-
-      state.totalCount = calcProductCount(state.cart);
-    },
   },
 });
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart, plusCartItem, minusCartItem, deleteCartItem } = actions;
+export const { addToCart, plusCartItem, minusCartItem } = actions;
 
 export default reducer;

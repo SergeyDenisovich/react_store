@@ -6,11 +6,11 @@
 
 - Product description page (if product has available attributes)
 
-- Ability to add product in cart (if product on sale!)
+- Ability to add/remove product in/from cart (if product on sale!)
 
-- Ability to change product count in cart or delete product from cart
+- Ability to change product count in cart
 
-- Ability to change product
+- Ability to change product attribute's
 
 ### In project uses next technologies:
 
