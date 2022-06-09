@@ -58,7 +58,7 @@ class CurrencySwitcher extends Component {
         {currencies && (
           <>
             <div onClick={this.toggleCurrencyBlock} ref={this.container} className={styles.currency}>
-              <span>{currencySymbol?.symbol}</span>
+              <span>{currencySymbol.symbol}</span>
               <img
                 src={arrow}
                 alt={'Arrow'}

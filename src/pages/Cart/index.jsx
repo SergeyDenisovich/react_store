@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
-// import { compose } from '@reduxjs/toolkit';
 
 import CartList from './CartList';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';

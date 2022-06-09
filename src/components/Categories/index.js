@@ -21,6 +21,9 @@ class Categories extends Component {
 
       this.setState({ categories: categoryNames });
       const category = categoryNames[0];
+
+      // take first product category and push it in to url IN FIRST RENDER
+      // in other cases take category rom store (for save page after reload)
       this.props.history.push(`/${this.props.category || category}`);
     };
 
