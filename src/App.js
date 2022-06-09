@@ -4,34 +4,34 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import ProductDescription from './pages/ProductDescription';
-import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
+import ErrorBoundary from './components/ErrorBoundary';
 
 class App extends Component {
   render() {
     const { history } = this.props;
 
     return (
-      <div className='container'>
+      <div className='wrapper'>
         <Header />
 
-        <Switch>
-          <Route history={history} exact path={'/'}>
-            <Home />
-          </Route>
+        <div className='container'>
+          <ErrorBoundary>
+            {/* <Switch> */}
+            <Route history={history} exact path={'/:category'}>
+              <Home />
+            </Route>
 
-          <Route history={history} path={'/product/:id'}>
-            <ProductDescription />
-          </Route>
+            <Route history={history} exact path={'/product/:id'}>
+              <ProductDescription />
+            </Route>
 
-          <Route history={history} path={'/cart'}>
-            <Cart />
-          </Route>
-
-          <Route history={history} path={'*'}>
-            <NotFound />
-          </Route>
-        </Switch>
+            <Route history={history} exact path={'/order/cart'}>
+              <Cart />
+            </Route>
+            {/* </Switch> */}
+          </ErrorBoundary>
+        </div>
       </div>
     );
   }

@@ -31,9 +31,7 @@ class Header extends Component {
       <div className={styles.header}>
         <Categories />
 
-        <Link to={'/'} className={styles.logo} title={'to Home page'}>
-          <img src={logo} alt='Logo' />
-        </Link>
+        <img className={styles.logo} src={logo} alt='Logo' />
 
         <div className={styles.actions}>
           <CurrencySwitcher />

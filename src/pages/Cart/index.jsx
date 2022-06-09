@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
+// import { compose } from '@reduxjs/toolkit';
 
-import CartItem from '../../components/CartItem';
-import { calculatePrice } from '../../utils/calculatePrice';
-import { productArrayFromCart } from '../../utils/productArrayFromCart';
+import CartList from './CartList';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
 import { totalPrice } from '../../store/selectors/cartSelector';
 
@@ -28,60 +27,32 @@ class Cart extends PureComponent {
     const {
       cart: { cart, totalCount },
       currency: { currency },
+      category,
       totalPrice,
     } = this.props;
 
-    const cartProducts = productArrayFromCart(cart);
-
     return (
       <section className={styles.cart}>
-        {cartProducts.length !== 0 ? (
-          <>
-            <h1>Cart</h1>
-
-            {cartProducts.map((product, index) => {
-              const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
-
-              return (
-                <CartItem
-                  key={`${product.id}_${index}`}
-                  product={product}
-                  cart={this.cart}
-                  priceSymbol={priceSymbol}
-                  productPrice={productPrice}
-                  onPlusCartItem={this.onPlusCartItem}
-                  onMinusCartItem={this.onMinusCartItem}
-                />
-              );
-            })}
-
-            <div className={styles.orderBlock}>
-              <span>Tax 21%:</span>
-              <span>{`${currency.symbol}${(totalPrice * this.tax).toFixed(2)}`}</span>
-              <span>Quantity:</span>
-              <span>{totalCount}</span>
-              <span>Total:</span>
-              <span>{`${currency.symbol}${totalPrice.toFixed(2)}`}</span>
-            </div>
-
-            <button className={styles.orderBtn}>order</button>
-          </>
-        ) : (
-          <>
-            <p>Cart is empty!</p>
-            <Link to={'/'}>
-              <button className={styles.back}>Back</button>
-            </Link>
-          </>
-        )}
+        <CartList
+          cartItems={cart}
+          currency={currency}
+          totalCount={totalCount}
+          totalPrice={totalPrice}
+          tax={this.tax}
+          cartName={this.cart}
+          category={category.category}
+          onPlusCartItem={this.onPlusCartItem}
+          onMinusCartItem={this.onMinusCartItem}
+        />
       </section>
     );
   }
 }
 
-const mapState = ({ cart, currency }) => ({
+const mapState = ({ cart, currency, category }) => ({
   cart: cart,
   currency: currency,
+  category: category,
   totalPrice: Object.keys(cart.cart).length > 0 && totalPrice(cart.cart, currency.currency.label),
 });
 

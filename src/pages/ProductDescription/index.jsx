@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { client } from '@tilework/opus';
 import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { Markup } from 'interweave';
 
+import ProductDescriptionGallery from './ProductDescriptionGallery';
+import ProductDescriptionAttributes from './ProductDescriptionAttributes';
 import { calculatePrice } from '../../utils/calculatePrice';
 import { getProduct } from '../../queries/getProduct';
-
 import { addToCart } from '../../store/slices/cartSlice';
-import ProductDescriptionPage from './ProductDescriptionPage';
+
+import styles from './ProductDescription.module.scss';
 
 class ProductDescription extends Component {
   state = {
     product: null,
     productImage: null,
     productPrice: null,
-    redirect: false,
-    selectedAttrs: null,
+    selectedAttrs: [],
   };
 
   componentDidMount() {
@@ -78,23 +79,69 @@ class ProductDescription extends Component {
     };
 
     this.props.addToCart(selectedProduct);
-    this.setState({ redirect: true });
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to='/' />;
-    }
+    const { product, productImage, productPrice } = this.state;
 
     return (
-      <ProductDescriptionPage
-        product={this.state.product}
-        productImage={this.state.productImage}
-        productPrice={this.state.productPrice}
-        setProductImg={this.setProductImg}
-        handleChangeAttrValue={this.handleChangeAttr}
-        onAddToCart={this.onAddToCart}
-      />
+      <>
+        {product && (
+          <section className={styles.product}>
+            <div className={styles.images}>
+              {/* 
+              ====================== small images 
+              */}
+
+              <ProductDescriptionGallery
+                gallery={product.gallery}
+                productName={product.name}
+                currentProductImage={productImage}
+                setProductImg={this.setProductImg}
+              />
+
+              {/* 
+              ====================== main big image
+              */}
+
+              <a href={productImage} className={styles.imageBig} target='_blank' rel='noreferrer'>
+                <img src={productImage} alt={product.name} />
+                {!product.inStock ? <p className={styles.outOfStock}>out of stock</p> : ''}
+              </a>
+            </div>
+            <div className={styles.description}>
+              <h3>{product.brand}</h3>
+              <h4>{product.name}</h4>
+
+              {/* 
+              ====================== attributes 
+              */}
+              <ProductDescriptionAttributes attributes={product.attributes} onChangeAttr={this.handleChangeAttr} />
+
+              {/* 
+              ====================== price
+              */}
+
+              <div className={styles.price}>
+                <div>Price:</div>
+                <div>{`${productPrice.priceSymbol}${productPrice.productPrice}`}</div>
+              </div>
+
+              <button
+                className={[styles.btn, !product.inStock ? styles.disabledBtn : ''].join(' ')}
+                onClick={this.onAddToCart}
+                disabled={!product.inStock}
+              >
+                add to cart
+              </button>
+              {/* 
+              ====================== text description (html!)
+              */}
+              <Markup className={styles.text} content={product.description} />
+            </div>
+          </section>
+        )}
+      </>
     );
   }
 }

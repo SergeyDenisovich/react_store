@@ -4,7 +4,13 @@
 body {
   font-family: 'Raleway', sans-serif;
   color: $font-color;
-  background: $bg-color;
+  // background: $bg-color;
+}
+
+.wrapper {
+  position: relative;
+  margin: 0 auto;
+  // background-color: $container-bg;
 }
 
 .container {
@@ -13,5 +19,5 @@ body {
   padding: 0 100px;
   width: 100%;
   max-width: 1440px;
-  background-color: $container-bg;
+  // background-color: $container-bg;
 }

@@ -5,6 +5,9 @@ import { client } from '../../client';
 import { getCurrencies } from '../../queries/getCurrencies';
 import { setCurrency } from '../../store/slices/currencySlice';
 import CurrencyBlock from './CurrencyBlock';
+import arrow from '../../assets/images/arrow.svg';
+
+import styles from './CurrencySwitcher.module.scss';
 
 class CurrencySwitcher extends Component {
   container = React.createRef();
@@ -47,15 +50,29 @@ class CurrencySwitcher extends Component {
     this.toggleCurrencyBlock();
   };
   render() {
+    const { currencySymbol } = this.props;
+    const { currencies, isCurrencyBlockVisible } = this.state;
+
     return (
-      <CurrencyBlock
-        currencySymbol={this.props.currencySymbol}
-        currencies={this.state.currencies}
-        isCurrencyBlockVisible={this.state.isCurrencyBlockVisible}
-        onChangeCurrency={this.onChangeCurrency}
-        toggleCurrencyBlock={this.toggleCurrencyBlock}
-        container={this.container}
-      />
+      <>
+        {currencies && (
+          <>
+            <div onClick={this.toggleCurrencyBlock} ref={this.container} className={styles.currency}>
+              <span>{currencySymbol?.symbol}</span>
+              <img
+                src={arrow}
+                alt={'Arrow'}
+                className={[isCurrencyBlockVisible && styles.arrowUp, styles.arrow].join(' ')}
+              />
+            </div>
+            <CurrencyBlock
+              currencies={currencies}
+              isCurrencyBlockVisible={isCurrencyBlockVisible}
+              onChangeCurrency={this.onChangeCurrency}
+            />
+          </>
+        )}
+      </>
     );
   }
 }

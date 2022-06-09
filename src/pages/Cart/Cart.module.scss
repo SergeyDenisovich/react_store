@@ -40,12 +40,25 @@
     cursor: pointer;
   }
 
-  .back {
-    margin-top: 15px;
-    padding: 13px 50px;
-    text-transform: uppercase;
-    color: #fff;
-    background: $color-green;
-    cursor: pointer;
+  .cartEmpty {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .back {
+      margin-top: 15px;
+      padding: 13px 50px;
+      text-transform: uppercase;
+      color: #fff;
+      background: $color-green;
+      cursor: pointer;
+    }
   }
 }

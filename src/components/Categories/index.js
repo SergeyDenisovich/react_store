@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from '@reduxjs/toolkit';
+import { withRouter } from 'react-router-dom';
 
 import { client } from '../../client';
 import { getCategories } from '../../queries/getCategories';
@@ -18,7 +20,8 @@ class Categories extends Component {
       const categoryNames = categories.map(({ name }) => name);
 
       this.setState({ categories: categoryNames });
-      this.props.setCategory(categoryNames[0]);
+      const category = categoryNames[0];
+      this.props.history.push(`/${this.props.category || category}`);
     };
 
     queryCategories();
@@ -29,13 +32,9 @@ class Categories extends Component {
   };
 
   render() {
-    return (
-      <CategoryList
-        category={this.props.category}
-        categories={this.state.categories}
-        changeCategory={this.changeCategory}
-      />
-    );
+    const { categories } = this.state;
+
+    return <CategoryList categories={categories} changeCategory={this.changeCategory} />;
   }
 }
 
@@ -43,4 +42,4 @@ const mapState = ({ category }) => ({
   category: category.category,
 });
 
-export default connect(mapState, { setCategory })(Categories);
+export default compose(connect(mapState, { setCategory }), withRouter)(Categories);

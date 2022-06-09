@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import cart from '../../assets/images/add-to-cart.svg';
@@ -8,13 +9,23 @@ import styles from './ProductCard.module.scss';
 
 class ProductCard extends Component {
   render() {
-    const { id, productName, productBrand, image, prices, currency, inStock, attributes, onAddToCart } = this.props;
+    const {
+      id,
+      productName,
+      productBrand,
+      image,
+      prices,
+      currency,
+      inStock,
+      attributes,
+      onAddToCart,
+      location: { pathname },
+    } = this.props;
     const productTitle = `${productBrand} ${productName}`;
-
-    const { priceSymbol, productPrice } = calculatePrice(currency?.label, prices);
+    const { priceSymbol, productPrice } = calculatePrice(currency.label, prices);
 
     return (
-      <div className={styles.card}>
+      <Link className={styles.card} to={attributes.length ? `/product/${id}` : pathname}>
         <div className={styles.image}>
           <img src={image} alt={productName} />
           {!inStock ? <p className={styles.outOfStock}>out of stock</p> : ''}
@@ -22,22 +33,17 @@ class ProductCard extends Component {
 
         <div className={styles.description}>
           <h3>{productTitle}</h3>
-          <div>{`${priceSymbol} ${productPrice}`}</div>
+          <div>{`${priceSymbol}${productPrice}`}</div>
         </div>
 
-        {inStock &&
-          (attributes.length ? (
-            <Link to={`/product/${id}`}>
-              <img src={cart} alt={'Cart'} />
-            </Link>
-          ) : (
-            <button onClick={() => onAddToCart(id)}>
-              <img src={cart} alt={'Cart'} />
-            </button>
-          ))}
-      </div>
+        {inStock && (
+          <button onClick={onAddToCart.bind(null, id)}>
+            <img src={cart} alt={'Cart'} />
+          </button>
+        )}
+      </Link>
     );
   }
 }
 
-export default ProductCard;
+export default withRouter(ProductCard);

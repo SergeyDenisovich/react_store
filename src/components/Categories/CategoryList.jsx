@@ -1,29 +1,22 @@
-import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Categories.module.scss';
 
-class CategoryList extends Component {
-  render() {
-    const { categories, category, changeCategory } = this.props;
-
-    return (
-      <>
-        {categories.length ? (
-          <ul className={styles.categories}>
-            {categories.map((name, index) => (
-              <li
-                key={index}
-                className={category === name ? styles.activeCategory : undefined}
-                onClick={() => changeCategory(name)}
-              >
-                {name.toUpperCase()}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </>
-    );
-  }
+function CategoryList({ categories, changeCategory }) {
+  return (
+    <nav className={styles.categories}>
+      {categories.map((category, index) => (
+        <NavLink
+          to={`/${category}`}
+          key={index}
+          activeClassName={styles.activeCategory}
+          onClick={changeCategory.bind(null, category)}
+        >
+          {category.toUpperCase()}
+        </NavLink>
+      ))}
+    </nav>
+  );
 }
 
 export default CategoryList;

@@ -47,7 +47,8 @@
       line-height: 18px;
     }
 
-    .btn {
+    .btn,
+    .disabledBtn {
       margin-bottom: 40px;
       padding: 16px 90px;
       width: 100%;
@@ -55,6 +56,11 @@
       color: #fff;
       text-transform: uppercase;
       cursor: pointer;
+    }
+
+    .disabledBtn {
+      background-color: lighten($color-green, 15%);
+      cursor: default;
     }
 
     .text {
@@ -105,6 +111,16 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .outOfStock {
+    position: absolute;
+    font-size: 36px;
+    color: #8d8f9a;
+    text-transform: uppercase;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
