@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -13,11 +13,10 @@ class App extends Component {
 
     return (
       <div className='wrapper'>
-        <Header />
+        <ErrorBoundary>
+          <Header />
 
-        <div className='container'>
-          <ErrorBoundary>
-            {/* <Switch> */}
+          <div className='container'>
             <Route history={history} exact path={'/:category'}>
               <Home />
             </Route>
@@ -29,9 +28,8 @@ class App extends Component {
             <Route history={history} exact path={'/order/cart'}>
               <Cart />
             </Route>
-            {/* </Switch> */}
-          </ErrorBoundary>
-        </div>
+          </div>
+        </ErrorBoundary>
       </div>
     );
   }
