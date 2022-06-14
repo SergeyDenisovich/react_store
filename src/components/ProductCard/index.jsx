@@ -13,9 +13,9 @@ class ProductCard extends Component {
       id,
       productName,
       productBrand,
-      image,
+      image, // ================
       prices,
-      currency,
+      currency, // =================
       inStock,
       attributes,
       onAddToCart,
@@ -25,6 +25,7 @@ class ProductCard extends Component {
     const { priceSymbol, productPrice } = calculatePrice(currency.label, prices);
 
     return (
+      // <li></li> =======
       <Link className={styles.card} to={attributes.length ? `/product/${id}` : pathname}>
         <div className={styles.image}>
           <img src={image} alt={productName} />
@@ -37,7 +38,7 @@ class ProductCard extends Component {
         </div>
 
         {inStock && (
-          <button onClick={onAddToCart.bind(null, id)}>
+          <button onClick={!attributes.length ? onAddToCart.bind(null, id) : undefined}>
             <img src={cart} alt={'Cart'} />
           </button>
         )}

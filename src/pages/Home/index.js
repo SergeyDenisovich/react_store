@@ -17,7 +17,7 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    const category = this.props.location.pathname.slice(1);
+    const category = this.props.match.params.category;
     this.queryCategory(category);
   }
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { client } from '@tilework/opus';
 import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';

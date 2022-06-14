@@ -3,6 +3,10 @@ import ProductCard from '../../components/ProductCard';
 function HomePage({ products, currency, addProductToCart }) {
   return products.map(({ id, name, brand, gallery, prices, inStock, attributes }) => (
     <ProductCard
+      // key={product.id}
+      // produc={product}
+      // currency={currency}
+      // addProductToCart={addProductToCart}
       key={id}
       id={id}
       productName={name}

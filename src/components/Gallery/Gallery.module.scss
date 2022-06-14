@@ -23,6 +23,10 @@
   img.nextSlide {
     transform: translateX(100%);
   }
+  button {
+    padding: 0;
+    background: transparent;
+  }
 
   button.prevBtn {
     position: absolute;

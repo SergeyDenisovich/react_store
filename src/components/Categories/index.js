@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { withRouter } from 'react-router-dom';
@@ -8,27 +8,32 @@ import { getCategories } from '../../queries/getCategories';
 import { setCategory } from '../../store/slices/categorySlice';
 import CategoryList from './CategoryList';
 
-class Categories extends Component {
+class Categories extends PureComponent {
+  initialCategory = '';
   state = {
     categories: [],
   };
 
   componentDidMount() {
-    // request category data
     const queryCategories = async () => {
       const { categories } = await client.post(getCategories);
       const categoryNames = categories.map(({ name }) => name);
+      const initialCategory = categoryNames[0];
 
       this.setState({ categories: categoryNames });
-      const category = categoryNames[0];
 
-      // take first product category and push it in to url IN FIRST RENDER
-      // in other cases take category rom store (for save page after reload)
-      this.props.history.push(`/${this.props.category || category}`);
+      this.setInitialCategory(initialCategory);
     };
 
     queryCategories();
   }
+
+  setInitialCategory = (category) => {
+    if (!this.initialCategory && !this.props.category) {
+      this.props.history.push(`/${category}`);
+      this.props.setCategory(category);
+    }
+  };
 
   changeCategory = (categoryName) => {
     this.props.setCategory(categoryName);

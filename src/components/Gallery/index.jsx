@@ -9,6 +9,7 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      gallery: props.gallery,
       index: 0,
     };
 
@@ -17,7 +18,7 @@ class Gallery extends Component {
   }
 
   calculateImagePosition = () => {
-    const lastIndex = this.state.gallery?.length - 1;
+    const lastIndex = this.state.gallery.length - 1;
 
     if (this.state.index < 0) {
       this.setState({ index: lastIndex });
@@ -40,10 +41,12 @@ class Gallery extends Component {
 
   showPrevImage = () => {
     this.setState((state) => ({ index: state.index - 1 }));
+    console.log(this.state.index);
   };
 
   showNextImage = () => {
     this.setState((state) => ({ index: state.index + 1 }));
+    console.log(this.state.index);
   };
 
   render() {
