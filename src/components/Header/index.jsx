@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CurrencySwitcher from '../CurrencySwitcher';
 import CartMini from '../CartMini';
@@ -50,5 +51,9 @@ class Header extends PureComponent {
 const mapState = (state) => ({
   cartCount: state.cart.totalCount,
 });
+
+Header.propTypes = {
+  cartCount: PropTypes.number,
+};
 
 export default connect(mapState)(Header);

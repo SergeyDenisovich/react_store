@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import AttributeItems from './AttributeItems';
 
@@ -25,5 +26,10 @@ class CartItemAttributes extends PureComponent {
     );
   }
 }
+
+CartItemAttributes.propTypes = {
+  attributes: PropTypes.arrayOf(PropTypes.object),
+  selectedOptions: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default CartItemAttributes;

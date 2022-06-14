@@ -4,6 +4,7 @@ import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Markup } from 'interweave';
+import PropTypes from 'prop-types';
 
 import ProductDescriptionGallery from './ProductDescriptionGallery';
 import ProductDescriptionAttributes from './ProductDescriptionAttributes';
@@ -149,5 +150,13 @@ class ProductDescription extends PureComponent {
 const mapState = ({ currency }) => ({
   currency: currency.currency,
 });
+
+ProductDescription.propTypes = {
+  addToCart: PropTypes.func,
+  curency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+};
 
 export default compose(connect(mapState, { addToCart }), withRouter)(ProductDescription);

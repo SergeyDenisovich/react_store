@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { client } from '../../client';
 import { getCurrencies } from '../../queries/getCurrencies';
@@ -50,7 +51,7 @@ class CurrencySwitcher extends Component {
     this.toggleCurrencyBlock();
   };
   render() {
-    const { currencySymbol } = this.props;
+    const { currency } = this.props;
     const { currencies, isCurrencyBlockVisible } = this.state;
 
     return (
@@ -58,7 +59,7 @@ class CurrencySwitcher extends Component {
         {currencies && (
           <>
             <div onClick={this.toggleCurrencyBlock} ref={this.container} className={styles.currency}>
-              <span>{currencySymbol?.symbol}</span>
+              <span>{currency.symbol}</span>
               <img
                 src={arrow}
                 alt={'Arrow'}
@@ -78,7 +79,14 @@ class CurrencySwitcher extends Component {
 }
 
 const mapState = ({ currency }) => ({
-  currencySymbol: currency.currency,
+  currency: currency.currency,
 });
+
+CurrencySwitcher.propTypes = {
+  currency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+};
 
 export default connect(mapState, { setCurrency })(CurrencySwitcher);

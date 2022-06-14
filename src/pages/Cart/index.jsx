@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CartList from './CartList';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
@@ -53,5 +54,24 @@ const mapState = ({ cart, currency, category }) => ({
   category: category,
   totalPrice: Object.keys(cart.cart).length > 0 && totalPrice(cart.cart, currency.currency.label),
 });
+
+Cart.propTypes = {
+  cart: PropTypes.shape({
+    cart: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
+    totalCount: PropTypes.number,
+  }),
+  totalPrice: PropTypes.number,
+  currency: PropTypes.shape({
+    currency: PropTypes.shape({
+      label: PropTypes.string,
+      symbol: PropTypes.string,
+    }),
+  }),
+  category: PropTypes.shape({
+    category: PropTypes.string,
+  }),
+  onPlusCartItem: PropTypes.func,
+  onMinusCartItem: PropTypes.func,
+};
 
 export default connect(mapState, { plusCartItem, minusCartItem })(Cart);

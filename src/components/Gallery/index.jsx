@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import GalleryList from './GalleryList';
 import { throttle } from '../../utils/throttle';
@@ -41,12 +42,10 @@ class Gallery extends Component {
 
   showPrevImage = () => {
     this.setState((state) => ({ index: state.index - 1 }));
-    console.log(this.state.index);
   };
 
   showNextImage = () => {
     this.setState((state) => ({ index: state.index + 1 }));
-    console.log(this.state.index);
   };
 
   render() {
@@ -85,5 +84,9 @@ class Gallery extends Component {
     );
   }
 }
+
+Gallery.propTypes = {
+  gallery: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default Gallery;

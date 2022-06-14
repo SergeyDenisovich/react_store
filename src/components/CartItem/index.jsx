@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import CartItemGallery from './CartItemGallery';
 import CartItemAttributes from './CartItemAttributes';
@@ -54,5 +55,22 @@ class CartItem extends PureComponent {
     );
   }
 }
+
+CartItem.propTypes = {
+  onPlusCartItem: PropTypes.func,
+  onMinusCartItem: PropTypes.func,
+  cart: PropTypes.string,
+  priceSymbol: PropTypes.string,
+  productPrice: PropTypes.number,
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    inStock: PropTypes.bool,
+    brand: PropTypes.string,
+    gallery: PropTypes.arrayOf(PropTypes.string),
+    prices: PropTypes.arrayOf(PropTypes.object),
+    attributes: PropTypes.array,
+  }).isRequired,
+};
 
 export default CartItem;

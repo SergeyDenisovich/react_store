@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Gallery.module.scss';
 
@@ -20,5 +21,10 @@ class GalleryList extends PureComponent {
     });
   }
 }
+
+GalleryList.propTypes = {
+  gallery: PropTypes.arrayOf(PropTypes.string),
+  index: PropTypes.number,
+};
 
 export default GalleryList;

@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './CurrencySwitcher.module.scss';
 
@@ -19,5 +20,16 @@ class CurrencyBlock extends PureComponent {
     }
   }
 }
+
+CurrencyBlock.propTypes = {
+  currencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      symbol: PropTypes.string,
+    })
+  ),
+  isCurrencyBlockVisible: PropTypes.bool,
+  onChangeCurrency: PropTypes.func,
+};
 
 export default CurrencyBlock;

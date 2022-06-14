@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './CartItem.module.scss';
 
@@ -31,5 +32,22 @@ class AttributeItems extends PureComponent {
     );
   }
 }
+
+AttributeItems.propTypes = {
+  selectedName: PropTypes.string,
+  selectedValue: PropTypes.string,
+  attr: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        value: PropTypes.string,
+        displayValue: PropTypes.string,
+      })
+    ),
+  }),
+};
 
 export default AttributeItems;

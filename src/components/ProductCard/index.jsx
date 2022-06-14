@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import cart from '../../assets/images/add-to-cart.svg';
 import { calculatePrice } from '../../utils/calculatePrice';
@@ -42,5 +43,23 @@ class ProductCard extends PureComponent {
     );
   }
 }
+
+ProductCard.propTypes = {
+  currency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }).isRequired,
+  onAddToCart: PropTypes.func.isRequired,
+  location: PropTypes.object,
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    inStock: PropTypes.bool,
+    brand: PropTypes.string,
+    gallery: PropTypes.arrayOf(PropTypes.string),
+    prices: PropTypes.arrayOf(PropTypes.object),
+    attributes: PropTypes.array,
+  }).isRequired,
+};
 
 export default withRouter(ProductCard);

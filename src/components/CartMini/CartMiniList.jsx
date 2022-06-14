@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import CartItem from '../CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
@@ -48,5 +49,18 @@ class CartMiniList extends PureComponent {
     }
   }
 }
+
+CartMiniList.propTypes = {
+  totalCount: PropTypes.number,
+  totalPrice: PropTypes.number,
+  onPlusCartItem: PropTypes.func,
+  onMinusCartItem: PropTypes.func,
+  cartName: PropTypes.string,
+  currency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  cartItems: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
+};
 
 export default CartMiniList;

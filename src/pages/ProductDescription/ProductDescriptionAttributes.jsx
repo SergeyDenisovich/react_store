@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './ProductDescription.module.scss';
 
@@ -39,5 +40,10 @@ class ProductDescriptionAttributes extends PureComponent {
     );
   }
 }
+
+ProductDescriptionAttributes.propTypes = {
+  onChangeAttr: PropTypes.func,
+  attributes: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default ProductDescriptionAttributes;

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { client } from '../../client';
 
 import CategoryList from './CategoryList';
@@ -49,5 +50,10 @@ class Categories extends PureComponent {
 const mapState = ({ category }) => ({
   category: category.category,
 });
+
+Categories.propTypes = {
+  category: PropTypes.string,
+  setCategory: PropTypes.func,
+};
 
 export default compose(connect(mapState, { setCategory }), withRouter)(Categories);

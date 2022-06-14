@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { client } from '@tilework/opus';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import HomePage from './HomePage';
 import { upperName } from '../../utils/upperName';
@@ -61,5 +62,14 @@ const mapState = ({ currency, category }) => ({
   currency: currency.currency,
   category: category.category,
 });
+
+Home.propTypes = {
+  category: PropTypes.string,
+  addToCart: PropTypes.func,
+  currency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+};
 
 export default compose(connect(mapState, { addToCart }), withRouter)(Home);

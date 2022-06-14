@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import styles from './Categories.module.scss';
 
@@ -23,5 +24,10 @@ class CategoryList extends PureComponent {
     );
   }
 }
+
+CategoryList.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string),
+  changeCategory: PropTypes.func,
+};
 
 export default CategoryList;

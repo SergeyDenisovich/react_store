@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import CartItem from '../../components/CartItem';
 import { calculatePrice } from '../../utils/calculatePrice';
@@ -59,5 +60,20 @@ class CartList extends PureComponent {
     }
   }
 }
+
+CartList.propTypes = {
+  cartName: PropTypes.string,
+  category: PropTypes.string,
+  tax: PropTypes.number,
+  totalCount: PropTypes.number,
+  totalPrice: PropTypes.number,
+  onPlusCartItem: PropTypes.func,
+  onMinusCartItem: PropTypes.func,
+  currency: PropTypes.shape({
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  cartItems: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
+};
 
 export default CartList;

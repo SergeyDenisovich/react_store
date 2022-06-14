@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CartMiniList from './CartMiniList';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
@@ -80,5 +81,22 @@ const mapState = ({ cart, currency }) => ({
   currency: currency,
   totalPrice: Object.keys(cart.cart).length > 0 && totalPrice(cart.cart, currency.currency.label),
 });
+
+CartMini.propTypes = {
+  isVisible: PropTypes.bool,
+  totalPrice: PropTypes.number,
+  closeCartMini: PropTypes.func,
+  currency: PropTypes.shape({
+    currency: PropTypes.shape({
+      label: PropTypes.string,
+      symbol: PropTypes.string,
+    }),
+  }),
+  totalCount: PropTypes.number,
+  cart: PropTypes.shape({
+    cart: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
+    totalCount: PropTypes.number,
+  }),
+};
 
 export default connect(mapState, { plusCartItem, minusCartItem })(CartMini);

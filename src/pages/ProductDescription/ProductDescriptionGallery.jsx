@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './ProductDescription.module.scss';
 
@@ -17,5 +18,12 @@ class ProductDescriptionGallery extends PureComponent {
     );
   }
 }
+
+ProductDescriptionGallery.propTypes = {
+  productName: PropTypes.string,
+  setProductImg: PropTypes.func,
+  currentProductImage: PropTypes.string,
+  gallery: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default ProductDescriptionGallery;

@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import Gallery from '../Gallery';
 
@@ -11,5 +12,11 @@ class CartItemGallery extends PureComponent {
     }
   }
 }
+
+CartItemGallery.propTypes = {
+  cart: PropTypes.string,
+  name: PropTypes.string,
+  imageGallery: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default CartItemGallery;
