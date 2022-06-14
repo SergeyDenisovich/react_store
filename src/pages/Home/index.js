@@ -48,9 +48,8 @@ class Home extends PureComponent {
         {products && (
           <>
             <h1 className={styles.categoryName}>{category && upperName(category)}</h1>
-            <div className={styles.products}>
-              <HomePage products={products} currency={currency} addProductToCart={this.addProductToCart} />
-            </div>
+
+            <HomePage products={products} currency={currency} addProductToCart={this.addProductToCart} />
           </>
         )}
       </>

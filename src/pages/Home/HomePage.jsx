@@ -1,24 +1,20 @@
+import { PureComponent } from 'react';
+
 import ProductCard from '../../components/ProductCard';
 
-function HomePage({ products, currency, addProductToCart }) {
-  return products.map(({ id, name, brand, gallery, prices, inStock, attributes }) => (
-    <ProductCard
-      // key={product.id}
-      // produc={product}
-      // currency={currency}
-      // addProductToCart={addProductToCart}
-      key={id}
-      id={id}
-      productName={name}
-      productBrand={brand}
-      image={gallery[0]}
-      prices={prices}
-      inStock={inStock}
-      attributes={attributes}
-      currency={currency}
-      onAddToCart={addProductToCart}
-    />
-  ));
+import styles from './Home.module.scss';
+
+class HomePage extends PureComponent {
+  render() {
+    const { products, currency, addProductToCart } = this.props;
+    return (
+      <ul className={styles.products}>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} currency={currency} onAddToCart={addProductToCart} />
+        ))}
+      </ul>
+    );
+  }
 }
 
 export default HomePage;

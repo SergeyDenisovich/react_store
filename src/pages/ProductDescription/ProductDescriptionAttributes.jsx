@@ -1,17 +1,19 @@
-import { Fragment } from 'react';
+import { PureComponent } from 'react';
 
 import styles from './ProductDescription.module.scss';
 
-function ProductDescriptionAttributes({ attributes, onChangeAttr }) {
-  return (
-    <>
-      {attributes.map(({ id, name, type, items }) => {
-        return (
-          <div key={id} className={styles.attributeBlock}>
+class ProductDescriptionAttributes extends PureComponent {
+  render() {
+    const { attributes, onChangeAttr } = this.props;
+
+    return (
+      <ul>
+        {attributes.map(({ id, name, type, items }) => (
+          <li key={id} className={styles.attributeBlock}>
             <h5>{`${name}:`}</h5>
-            <div className={styles.attrItems}>
-              {items.map(({ id, value, displayValue }, index) => (
-                <Fragment key={id}>
+            <ul className={styles.attrItems}>
+              {items.map(({ id, value }, index) => (
+                <li key={id}>
                   <input
                     type='radio'
                     id={`${value}${name}`}
@@ -20,29 +22,22 @@ function ProductDescriptionAttributes({ attributes, onChangeAttr }) {
                     onChange={onChangeAttr.bind(null, name, value)}
                     defaultChecked={index === 0}
                   />
-                  {type === 'text' ? (
-                    <label htmlFor={`${value}${name}`} className={styles.attr} data-attr='text'>
-                      {value}
-                    </label>
-                  ) : (
-                    <label
-                      title={displayValue}
-                      htmlFor={`${value}${name}`}
-                      style={{ background: `${value}` }}
-                      className={styles.attrSwatch}
-                      data-attr='swatch'
-                      onChange={onChangeAttr.bind(null, name, value)}
-                      defaultChecked={index === 0}
-                    />
-                  )}
-                </Fragment>
+                  <label
+                    htmlFor={`${value}${name}`}
+                    style={{ background: type !== 'text' ? `${value}` : '' }}
+                    className={type === 'text' ? styles.attr : styles.attrSwatch}
+                    data-attr={type === 'text' ? 'text' : 'swatch'}
+                  >
+                    {type === 'text' ? value : ''}
+                  </label>
+                </li>
               ))}
-            </div>
-          </div>
-        );
-      })}
-    </>
-  );
+            </ul>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 }
 
 export default ProductDescriptionAttributes;

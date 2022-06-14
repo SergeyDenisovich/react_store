@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import { PureComponent } from 'react';
 
 import CartItemGallery from './CartItemGallery';
+import CartItemAttributes from './CartItemAttributes';
 import plusIcon from '../../assets/images/plus-square.svg';
 import minusIcon from '../../assets/images/minus-square.svg';
 
 import styles from './CartItem.module.scss';
-import CartItemAttributes from './CartItemAttributes';
 
-class CartItem extends Component {
+class CartItem extends PureComponent {
   handleOnPlusCartItem = () => {
     this.props.onPlusCartItem(this.props.product);
   };

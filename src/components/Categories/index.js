@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { withRouter } from 'react-router-dom';
-
 import { client } from '../../client';
+
+import CategoryList from './CategoryList';
 import { getCategories } from '../../queries/getCategories';
 import { setCategory } from '../../store/slices/categorySlice';
-import CategoryList from './CategoryList';
 
 class Categories extends PureComponent {
   initialCategory = '';

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import CurrencySwitcher from '../CurrencySwitcher';
@@ -9,7 +9,7 @@ import cart from '../../assets/images/cart.svg';
 
 import styles from './Header.module.scss';
 
-class Header extends Component {
+class Header extends PureComponent {
   state = {
     isCartMiniVisible: false,
   };

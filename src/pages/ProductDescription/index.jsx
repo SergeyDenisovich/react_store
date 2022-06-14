@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { PureComponent } from 'react';
 import { client } from '@tilework/opus';
 import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { addToCart } from '../../store/slices/cartSlice';
 
 import styles from './ProductDescription.module.scss';
 
-class ProductDescription extends Component {
+class ProductDescription extends PureComponent {
   state = {
     product: null,
     productImage: null,

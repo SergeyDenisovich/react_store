@@ -74,7 +74,7 @@
       padding: 0 0 3px 3px;
     }
 
-    span.attrText {
+    .attrText {
       min-width: 63px;
       min-height: 45px;
       display: flex;
@@ -85,7 +85,7 @@
       border: 1px solid #1d1f22;
     }
 
-    span.attrSwatch {
+    .attrSwatch {
       min-width: 32px;
       min-height: 32px;
     }
@@ -202,7 +202,7 @@
       padding: 0 0 2px 2px;
     }
 
-    span.attrText {
+    .attrText {
       min-width: 24px;
       min-height: 24px;
       padding: 2px 0;
@@ -215,7 +215,7 @@
       font-family: 'Source Sans Pro', sans-serif;
     }
 
-    span.attrSwatch {
+    .attrSwatch {
       min-width: 16px;
       min-height: 16px;
       border: 1px solid $bg-color;

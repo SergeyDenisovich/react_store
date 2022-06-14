@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import CartMiniList from './CartMiniList';
 import { plusCartItem, minusCartItem } from '../../store/slices/cartSlice';
 import { totalPrice } from '../../store/selectors/cartSelector';
 
 import styles from './CartMini.module.scss';
-import CartMiniList from './CartMiniList';
 
 class CartMini extends PureComponent {
   cart = 'miniCart';

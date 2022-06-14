@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { PureComponent } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -7,42 +7,38 @@ import { calculatePrice } from '../../utils/calculatePrice';
 
 import styles from './ProductCard.module.scss';
 
-class ProductCard extends Component {
+class ProductCard extends PureComponent {
   render() {
     const {
-      id,
-      productName,
-      productBrand,
-      image, // ================
-      prices,
-      currency, // =================
-      inStock,
-      attributes,
+      product,
+      currency,
       onAddToCart,
       location: { pathname },
     } = this.props;
-    const productTitle = `${productBrand} ${productName}`;
-    const { priceSymbol, productPrice } = calculatePrice(currency.label, prices);
+    const image = product.gallery[0];
+    const productTitle = `${product.brand} ${product.name}`;
+    const { priceSymbol, productPrice } = calculatePrice(currency.label, product.prices);
 
     return (
-      // <li></li> =======
-      <Link className={styles.card} to={attributes.length ? `/product/${id}` : pathname}>
-        <div className={styles.image}>
-          <img src={image} alt={productName} />
-          {!inStock ? <p className={styles.outOfStock}>out of stock</p> : ''}
-        </div>
+      <li>
+        <Link className={styles.card} to={product.attributes.length ? `/product/${product.id}` : pathname}>
+          <div className={styles.image}>
+            <img src={image} alt={product.name} />
+            {!product.inStock ? <p className={styles.outOfStock}>out of stock</p> : ''}
+          </div>
 
-        <div className={styles.description}>
-          <h3>{productTitle}</h3>
-          <div>{`${priceSymbol}${productPrice}`}</div>
-        </div>
+          <div className={styles.description}>
+            <h3>{productTitle}</h3>
+            <div>{`${priceSymbol}${productPrice}`}</div>
+          </div>
 
-        {inStock && (
-          <button onClick={!attributes.length ? onAddToCart.bind(null, id) : undefined}>
-            <img src={cart} alt={'Cart'} />
-          </button>
-        )}
-      </Link>
+          {product.inStock && (
+            <button onClick={!product.attributes.length ? onAddToCart.bind(null, product.id) : undefined}>
+              <img src={cart} alt={'Cart'} />
+            </button>
+          )}
+        </Link>
+      </li>
     );
   }
 }

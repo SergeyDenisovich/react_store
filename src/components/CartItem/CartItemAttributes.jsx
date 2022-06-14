@@ -1,26 +1,29 @@
+import { PureComponent } from 'react';
+
 import AttributeItems from './AttributeItems';
 
 import styles from './CartItem.module.scss';
 
-function CartItemAttributes({ attributes, selectedOptions }) {
-  return (
-    <>
-      {attributes.map((attr, index) => {
-        const { name, value } = selectedOptions?.[index];
+class CartItemAttributes extends PureComponent {
+  render() {
+    const { attributes, selectedOptions } = this.props;
 
-        return (
-          <div key={attr.id} className={styles.attributeBlock}>
-            <div className={styles.attributeTitle}>{`${attr.name}:`}</div>
-            <div
-              className={[styles.attributeItems, attr.type === 'swatch' ? styles.attributeItemsSwatch : ''].join(' ')}
-            >
+    return (
+      <ul>
+        {attributes.map((attr, index) => {
+          const { name, value } = selectedOptions[index];
+
+          return (
+            <li key={attr.id} className={styles.attributeBlock}>
+              <div className={styles.attributeTitle}>{`${attr.name}:`}</div>
+
               <AttributeItems attr={attr} selectedName={name} selectedValue={value} />
-            </div>
-          </div>
-        );
-      })}
-    </>
-  );
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
 }
 
 export default CartItemAttributes;
