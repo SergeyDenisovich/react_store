@@ -10,7 +10,6 @@ import { getCategories } from '../../queries/getCategories';
 import { setCategory } from '../../store/slices/categorySlice';
 
 class Categories extends PureComponent {
-  // initialCategory = '';
   state = {
     initialCategory: '',
     categories: [],
@@ -25,8 +24,6 @@ class Categories extends PureComponent {
 
     queryCategories().then((categories) => {
       const category = categories[0];
-
-      console.log(this.props);
 
       if (category && !this.props.category) {
         this.props.history.push(`/${category}`);
@@ -43,8 +40,6 @@ class Categories extends PureComponent {
 
   render() {
     const { categories } = this.state;
-
-    console.log('render');
 
     return <CategoryList categories={categories} changeCategory={this.changeCategory} />;
   }

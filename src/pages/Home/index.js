@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { client } from '@tilework/opus';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
@@ -12,7 +12,7 @@ import { getCategory } from '../../queries/getCategory';
 
 import styles from './Home.module.scss';
 
-class Home extends Component {
+class Home extends PureComponent {
   state = {
     products: [],
   };
