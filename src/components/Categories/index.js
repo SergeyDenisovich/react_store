@@ -19,22 +19,18 @@ class Categories extends PureComponent {
     const queryCategories = async () => {
       const { categories } = await client.post(getCategories);
       const categoryNames = categories.map(({ name }) => name);
-      const initialCategory = categoryNames[0];
+      const category = categoryNames[0];
 
       this.setState({ categories: categoryNames });
 
-      this.setInitialCategory(initialCategory);
+      if (!this.initialCategory && !this.props.category) {
+        this.props.history.push(`/${category}`);
+        this.props.setCategory(category);
+      }
     };
 
     queryCategories();
   }
-
-  setInitialCategory = (category) => {
-    if (!this.initialCategory && !this.props.category) {
-      this.props.history.push(`/${category}`);
-      this.props.setCategory(category);
-    }
-  };
 
   changeCategory = (categoryName) => {
     this.props.setCategory(categoryName);
