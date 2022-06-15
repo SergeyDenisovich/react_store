@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
 import { withRouter } from 'react-router-dom';
@@ -10,8 +10,9 @@ import { getCategories } from '../../queries/getCategories';
 import { setCategory } from '../../store/slices/categorySlice';
 
 class Categories extends PureComponent {
-  initialCategory = '';
+  // initialCategory = '';
   state = {
+    initialCategory: '',
     categories: [],
   };
 
@@ -19,17 +20,21 @@ class Categories extends PureComponent {
     const queryCategories = async () => {
       const { categories } = await client.post(getCategories);
       const categoryNames = categories.map(({ name }) => name);
-      const category = categoryNames[0];
+      return categoryNames;
+    };
 
-      this.setState({ categories: categoryNames });
+    queryCategories().then((categories) => {
+      const category = categories[0];
 
-      if (!this.initialCategory && !this.props.category) {
+      console.log(this.props);
+
+      if (category && !this.props.category) {
         this.props.history.push(`/${category}`);
         this.props.setCategory(category);
       }
-    };
 
-    queryCategories();
+      this.setState({ categories });
+    });
   }
 
   changeCategory = (categoryName) => {
@@ -38,6 +43,8 @@ class Categories extends PureComponent {
 
   render() {
     const { categories } = this.state;
+
+    console.log('render');
 
     return <CategoryList categories={categories} changeCategory={this.changeCategory} />;
   }

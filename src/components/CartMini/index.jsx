@@ -84,7 +84,6 @@ const mapState = ({ cart, currency }) => ({
 
 CartMini.propTypes = {
   isVisible: PropTypes.bool,
-  totalPrice: PropTypes.number,
   closeCartMini: PropTypes.func,
   currency: PropTypes.shape({
     currency: PropTypes.shape({

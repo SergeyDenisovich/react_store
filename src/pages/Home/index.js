@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import { Component } from 'react';
 import { client } from '@tilework/opus';
 import { connect } from 'react-redux';
 import { compose } from '@reduxjs/toolkit';
@@ -12,7 +12,7 @@ import { getCategory } from '../../queries/getCategory';
 
 import styles from './Home.module.scss';
 
-class Home extends PureComponent {
+class Home extends Component {
   state = {
     products: [],
   };
@@ -29,10 +29,8 @@ class Home extends PureComponent {
   }
 
   queryCategory = async (category) => {
-    const {
-      category: { products },
-    } = await client.post(getCategory(category));
-    this.setState({ products });
+    const data = await client.post(getCategory(category));
+    this.setState({ products: data.category.products });
   };
 
   addProductToCart = (productId) => {

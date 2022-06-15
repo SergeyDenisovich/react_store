@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import { compose } from '@reduxjs/toolkit';
+import { connect } from 'react-redux';
 
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -8,6 +10,12 @@ import Cart from './pages/Cart';
 import ErrorBoundary from './components/ErrorBoundary';
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.history.location.pathname === '/' && this.props.category) {
+      this.props.history.push(`/${this.props.category}`);
+    }
+  }
+
   render() {
     const { history } = this.props;
 
@@ -35,4 +43,8 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+const mapState = ({ category }) => ({
+  category: category.category,
+});
+
+export default compose(connect(mapState), withRouter)(App);

@@ -26,7 +26,28 @@ class ProductDescription extends PureComponent {
     const { match } = this.props;
     const productId = match.params.id;
 
-    this.queryProduct(productId);
+    const queryProduct = async (productId) => {
+      const { product } = await client.post(getProduct(productId));
+
+      const selectedDefaultAttrs = product?.attributes?.map(({ name, items: [item] }) => {
+        const value = item.value;
+        return {
+          name,
+          value,
+        };
+      });
+
+      const { priceSymbol, productPrice } = calculatePrice(this.props.currency?.label, product?.prices);
+
+      this.setState({
+        product,
+        productImage: product?.gallery[0],
+        productPrice: { priceSymbol, productPrice },
+        selectedAttrs: selectedDefaultAttrs,
+      });
+    };
+
+    queryProduct(productId);
   }
 
   componentDidUpdate(prevProps) {
@@ -36,27 +57,6 @@ class ProductDescription extends PureComponent {
       this.setState({ productPrice: { priceSymbol, productPrice } });
     }
   }
-
-  queryProduct = async (productId) => {
-    const { product } = await client.post(getProduct(productId));
-
-    const selectedDefaultAttrs = product?.attributes?.map(({ name, items: [item] }) => {
-      const value = item.value;
-      return {
-        name,
-        value,
-      };
-    });
-
-    const { priceSymbol, productPrice } = calculatePrice(this.props.currency?.label, product?.prices);
-
-    this.setState({
-      product,
-      productImage: product?.gallery[0],
-      productPrice: { priceSymbol, productPrice },
-      selectedAttrs: selectedDefaultAttrs,
-    });
-  };
 
   setProductImg = (img) => {
     this.setState({ productImage: img });
