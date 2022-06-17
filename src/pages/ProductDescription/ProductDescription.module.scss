@@ -18,6 +18,11 @@
     padding-right: 100px;
     width: 40%;
 
+    ul,
+    li {
+      list-style-type: square;
+    }
+
     h3 {
       margin-bottom: 16px;
       font-weight: 600;
