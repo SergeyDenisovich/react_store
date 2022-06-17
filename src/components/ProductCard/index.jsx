@@ -13,8 +13,8 @@ class ProductCard extends PureComponent {
     const {
       product,
       currency,
-      onAddToCart,
-      location: { pathname },
+      // onAddToCart,
+      // location,
     } = this.props;
     const image = product.gallery[0];
     const productTitle = `${product.brand} ${product.name}`;
@@ -22,7 +22,8 @@ class ProductCard extends PureComponent {
 
     return (
       <li>
-        <Link className={styles.card} to={product.attributes.length ? `/product/${product.id}` : pathname}>
+        {/* <Link className={styles.card} to={product.attributes.length ? `/product/${product.id}` : location.pathname}> */}
+        <Link className={styles.card} to={`/product/${product.id}`}>
           <div className={styles.image}>
             <img src={image} alt={product.name} />
             {!product.inStock ? <p className={styles.outOfStock}>out of stock</p> : ''}
@@ -34,7 +35,8 @@ class ProductCard extends PureComponent {
           </div>
 
           {product.inStock && (
-            <button onClick={!product.attributes.length ? onAddToCart.bind(null, product.id) : undefined}>
+            // <button onClick={!product.attributes.length ? onAddToCart.bind(null, product.id) : undefined}>
+            <button>
               <img src={cart} alt={'Cart'} />
             </button>
           )}
